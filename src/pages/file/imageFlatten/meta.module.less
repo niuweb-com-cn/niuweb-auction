@@ -1,0 +1,30 @@
+@import url(../../menu.module.less);
+
+.image-flatten-cover {
+  display: flex;
+  position: relative;
+  font-size: 12px;
+
+  & > .column {
+    flex: 1;
+    padding: 10px 16px;
+    line-height: 16px;
+
+    & > .fold > .files {
+      padding-left: 14px;
+    }
+  }
+
+  & > .icon {
+    position: absolute;
+    font-size: 16px;
+    width: 2px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(50% - 1px);
+    top: 0;
+    background-color: white;
+  }
+}

@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  gap: 16px;
+
+  & > .column {
+    width: calc((100% - 16px) / 3);
+
+    &:first-child {
+      padding-right: 16px;
+      border-right: 1px solid #d9d9d9;
+    }
+
+    & > .header {
+      display: flex;
+      gap: 8px;
+    }
+
+    & > .mapping {
+      height: calc(100vh - 180px);
+      margin-bottom: 16px;
+    }
+
+    & > .files {
+      height: calc(100vh - 180px);
+      margin-top: 16px;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      overflow-y: auto;
+
+      & > .file {
+        padding: 0 12px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        & > .path {
+          display: flex;
+          align-items: center;
+
+          & > span:not(:first-child)::before {
+            content: "/";
+            margin-left: 4px;
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+  }
+}

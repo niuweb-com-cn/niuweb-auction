@@ -1,0 +1,44 @@
+@import url(../../menu.module.less);
+
+.format-info-cover {
+  display: flex;
+  position: relative;
+  font-size: 12px;
+
+  & > .column {
+    flex: 1;
+    padding: 10px;
+    line-height: 16px;
+    overflow: hidden;
+
+    & > .lot {
+      margin-bottom: 16px;
+    }
+
+    & > .table {
+      white-space: nowrap;
+      border: 1px solid;
+      border-width: 0 1px 1px 0;
+
+      td {
+        border: 1px solid;
+        border-width: 1px 0 0 1px;
+        height: 20px;
+        padding: 0 4px;
+      }
+    }
+  }
+
+  & > .icon {
+    position: absolute;
+    font-size: 16px;
+    width: 2px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(50% - 1px);
+    top: 0;
+    background-color: white;
+  }
+}
