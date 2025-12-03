@@ -22,8 +22,8 @@ export default function App() {
   const breadcrumbs = useMemo(() => {
     const breadcrumbs: BreadcrumbItemType[] = [
       {
-        href: "/",
         title: <HomeOutlined />,
+        onClick: () => navigate("/")
       },
     ];
     const meta = Metas.find((meta) => location.pathname.indexOf(meta.path) >= 0);

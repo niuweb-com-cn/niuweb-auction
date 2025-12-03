@@ -7,8 +7,9 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package --all",
-    "make": "electron-forge make --platform=darwin && electron-forge make --platform=win32",
-    "publish": "electron-forge publish",
+    "make": "electron-forge make --platform=darwin && electron-forge make --platform=win32 && electron-forge make --platform=win32 --arch=ia32",
+    "make:win": "electron-forge make --platform=win32 --arch=ia32",
+    "publish": "electron-forge publish --platform=darwin && electron-forge publish --platform=win32 && electron-forge publish --platform=win32 --arch=ia32",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
@@ -27,6 +28,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.8.3",
     "@electron-forge/plugin-fuses": "^7.8.3",
     "@electron-forge/plugin-vite": "^7.8.3",
+    "@electron-forge/publisher-github": "^7.10.2",
     "@electron/fuses": "^2.0.0",
     "@types/electron-squirrel-startup": "^1.0.2",
     "@types/react": "^19.1.13",

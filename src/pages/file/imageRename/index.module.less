@@ -27,24 +27,40 @@
       border-radius: 6px;
       overflow-y: auto;
 
-      & > .file {
-        padding: 0 12px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
+      & > .group {
+        & > .title {
+          padding: 4px 12px;
+          font-size: 12px;
+          background: #efefef;
+        }
 
-        & > .path {
-          display: flex;
-          align-items: center;
-
-          & > span:not(:first-child)::before {
-            content: "/";
-            margin-left: 4px;
-            margin-right: 4px;
+        & > .items {
+          & > .empty {
+            padding: 0 12px;
+            height: 30px;
+            color: #999;
+          }
+          & > .item {
+            padding: 0 12px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+    
+            & > .path {
+              display: flex;
+              align-items: center;
+    
+              & > span:not(:first-child)::before {
+                content: "/";
+                margin-left: 4px;
+                margin-right: 4px;
+              }
+            }
           }
         }
       }
+
     }
   }
 }

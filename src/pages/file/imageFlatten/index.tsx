@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, Input, message, Tree } from "antd";
 import styles from "./index.module.less";
 import { CheckCircleTwoTone, CloseCircleTwoTone, FileImageOutlined, LoadingOutlined, PauseCircleTwoTone } from "@ant-design/icons";
@@ -13,6 +13,27 @@ enum ImageFlattenStatus {
 export default function ImageFlatten() {
   const [sourcePath, setSourcePath] = useState<string>();
   const [targetPath, setTargetPath] = useState<string>();
+
+  const sourceRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const handleScroll = (event: Event) => {
+    const scrollTop = (event.currentTarget as HTMLDivElement).scrollTop;
+    console.log("handleScroll", scrollTop);
+    sourceRef.current.scrollTop = scrollTop;
+    targetRef.current.scrollTop = scrollTop;
+  }
+  useEffect(() => {
+    if (sourceRef.current && targetRef.current) {
+      sourceRef.current.addEventListener("scroll", handleScroll);
+      targetRef.current.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (sourceRef.current && targetRef.current) {
+        sourceRef.current.removeEventListener("scroll", handleScroll);
+        targetRef.current.removeEventListener("scroll", handleScroll);
+      } 
+    }
+  }, []);
 
   const [sourceFiles, setSourceFiles] = useState<{ name: string }[]>([]);
   const [targetFiles, setTargetFiles] = useState<{ name: string; status: ImageFlattenStatus }[]>([]);
@@ -82,7 +103,7 @@ export default function ImageFlatten() {
             }}
             allowClear
           />
-          <div className={styles.files}>
+          <div className={styles.files} ref={sourceRef}>
             {sourceFiles.map((sourceFile) => (
               <div key={sourceFile.name} className={styles.file}>
                 <FileImageOutlined />
@@ -103,7 +124,7 @@ export default function ImageFlatten() {
             />
             <Button type="primary" onClick={() => handleExecute()}>开始执行</Button>
           </div>
-          <div className={styles.files}>
+          <div className={styles.files} ref={targetRef}>
             {targetFiles.map((targetFile) => (
               <div key={targetFile.name} className={styles.file}>
                 {targetFile.status === ImageFlattenStatus.SUCCESS && <CheckCircleTwoTone twoToneColor="#52c41a" />}

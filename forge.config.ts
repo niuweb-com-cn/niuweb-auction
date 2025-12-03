@@ -1,6 +1,7 @@
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { MakerDMG } from '@electron-forge/maker-dmg'
 import { MakerZIP } from '@electron-forge/maker-zip'
+import { PublisherGithub } from '@electron-forge/publisher-github'
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives'
@@ -22,6 +23,16 @@ const config: ForgeConfig = {
       background: "./images/dmg.png"
     }),
     new MakerZIP()
+  ],
+  publishers: [
+    new PublisherGithub({
+      repository: {
+        owner: "niuweb-com-cn",
+        name: "niuweb-auction"
+      },
+      prerelease: true,
+      authToken: "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"
+    })
   ],
   plugins: [
     new VitePlugin({
