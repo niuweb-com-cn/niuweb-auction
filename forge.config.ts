@@ -1,5 +1,6 @@
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { MakerDMG } from '@electron-forge/maker-dmg'
+import { MakerSquirrel } from '@electron-forge/maker-squirrel'
 import { MakerZIP } from '@electron-forge/maker-zip'
 import { PublisherGithub } from '@electron-forge/publisher-github'
 import { VitePlugin } from '@electron-forge/plugin-vite';
@@ -22,6 +23,7 @@ const config: ForgeConfig = {
       icon: "./images/icon.icns",
       background: "./images/dmg.png"
     }),
+    new MakerSquirrel(),
     new MakerZIP()
   ],
   publishers: [
