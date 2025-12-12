@@ -10,11 +10,23 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
 const config: ForgeConfig = {
   packagerConfig: {
+    //tmpdir: "../niuweb-auction-tmp",
     asar: true,
-    prune: true,
+    ifnore: [
+      /^\/src(\/|$)/,
+      /^\/.git(\/|$)/,
+      /^\/node_modules(\/|$)/,
+      /\.map$/,
+      /\.md$/
+    ],
     name: "NiuAuction",
     icon: "./images/icon",
-    overwrite: true,
+    win32metadata: {
+      // Windows 元数据
+    }
+  },
+  electronRebuildConfig: {
+    parallel: false
   },
   rebuildConfig: {},
   makers: [
@@ -23,7 +35,14 @@ const config: ForgeConfig = {
       icon: "./images/icon.icns",
       background: "./images/dmg.png"
     }),
-    new MakerSquirrel(),
+    new MakerSquirrel({
+      name: "NiuAuction",
+      authors: "NiuWeb",
+      exe: "NiuAuction.exe",
+      setupExe: "NiuAuctionSetup.exe",
+      noMsi: true,
+      rcedit: "wine"
+    }),
     new MakerZIP()
   ],
   publishers: [
