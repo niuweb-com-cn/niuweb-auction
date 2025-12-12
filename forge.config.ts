@@ -2,58 +2,32 @@ import type { ForgeConfig } from '@electron-forge/shared-types';
 import { MakerDMG } from '@electron-forge/maker-dmg'
 import { MakerSquirrel } from '@electron-forge/maker-squirrel'
 import { MakerZIP } from '@electron-forge/maker-zip'
-import { PublisherGithub } from '@electron-forge/publisher-github'
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives'
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import PackageJSON from "./package.json";
 
 const config: ForgeConfig = {
   packagerConfig: {
-    //tmpdir: "../niuweb-auction-tmp",
     asar: true,
-    ifnore: [
-      /^\/src(\/|$)/,
-      /^\/.git(\/|$)/,
-      /^\/node_modules(\/|$)/,
-      /\.map$/,
-      /\.md$/
-    ],
     name: "NiuAuction",
     icon: "./images/icon",
-    win32metadata: {
-      // Windows 元数据
-    }
   },
-  electronRebuildConfig: {
-    parallel: false
-  },
-  rebuildConfig: {},
   makers: [
-    new MakerDMG({
-      name: "NiuAuction",
+    new MakerDMG((arch) => ({
+      name: `NiuAuction-${arch}-${PackageJSON.version}`,
       icon: "./images/icon.icns",
       background: "./images/dmg.png"
-    }),
-    new MakerSquirrel({
+    })),
+    new MakerSquirrel((arch) => ({
       name: "NiuAuction",
       authors: "NiuWeb",
-      exe: "NiuAuction.exe",
-      setupExe: "NiuAuctionSetup.exe",
+      exe: `NiuAuction-${arch}-${PackageJSON.version}.exe`,
+      setupExe: `NiuAuctionSetup-${arch}-${PackageJSON.version}.exe`,
       noMsi: true,
-      rcedit: "wine"
-    }),
+    })),
     new MakerZIP()
-  ],
-  publishers: [
-    new PublisherGithub({
-      repository: {
-        owner: "niuweb-com-cn",
-        name: "niuweb-auction"
-      },
-      prerelease: true,
-      authToken: "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"
-    })
   ],
   plugins: [
     new VitePlugin({
