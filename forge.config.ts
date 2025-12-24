@@ -23,8 +23,8 @@ const config: ForgeConfig = {
     new MakerSquirrel((arch) => ({
       name: "NiuAuction",
       authors: "NiuWeb",
-      exe: `NiuAuction-${arch}-${PackageJSON.version}.exe`,
-      setupExe: `NiuAuctionSetup-${arch}-${PackageJSON.version}.exe`,
+      // exe: `NiuAuction-${arch}-${PackageJSON.version}.exe`,
+      // setupExe: `NiuAuctionSetup-${arch}-${PackageJSON.version}.exe`,
       noMsi: true,
     })),
     new MakerZIP()

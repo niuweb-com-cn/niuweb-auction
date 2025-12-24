@@ -25,7 +25,7 @@ jobs:
         node-version: '20'
 
     - name: Install
-      run: npm install
+      run: npm install --force
 
     - name: Build
       run: npx electron-forge make --platform=win32 --arch=${{ matrix.arch }}
