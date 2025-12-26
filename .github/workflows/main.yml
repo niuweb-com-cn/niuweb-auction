@@ -35,3 +35,29 @@ jobs:
       with:
         name: win32-${{ matrix.arch }}
         path: out/make/squirrel.windows/${{ matrix.arch }}/
+  build-macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install
+      run: npm install --force
+
+    - name: Build
+      run: npx electron-forge make --platform=darwin --arch=${{ matrix.arch }}
+
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: darwin-${{ matrix.arch }}
+        path: out/make/
